@@ -3,7 +3,6 @@
 import yt_dlp
 import os
 
-
 def download_media(url, options, hook):
     platform = options.get("platform", "other")
     filename = options.get("filename", "%(title)s")
@@ -15,25 +14,19 @@ def download_media(url, options, hook):
         "outtmpl": os.path.join(base_path, f"{filename}.%(ext)s"),
         "quiet": True,
         "no_warnings": True,
-        "ignoreerrors": True,
         "sleep_interval": 2,
         "max_sleep_interval": 5,
         "progress_hooks": [hook],
     }
 
-    # Audio only
     if options.get("type") == "audio":
         ydl_opts.update({
             "format": "bestaudio",
-            "postprocessors": [
-                {
-                    "key": "FFmpegExtractAudio",
-                    "preferredcodec": "mp3",
-                }
-            ],
+            "postprocessors": [{
+                "key": "FFmpegExtractAudio",
+                "preferredcodec": "mp3",
+            }]
         })
-
-    # Video
     else:
         ydl_opts["format"] = options.get("format", "best")
 

@@ -15,6 +15,7 @@ STRUCTURE = {
         "platform.py": "#Platform detect\n",
         "summary.py" : "# Download summary helper\n",
         "filename.py": "# Filename template helper\n",
+        "errors.py" : "# Simple error message mapper\n",
 
 
     },
